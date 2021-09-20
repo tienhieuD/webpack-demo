@@ -2,33 +2,23 @@ const path = require('path')
 const webpack = require('webpack')
 
 module.exports = {
-  // mode: 'development',
-  // devtool: 'inline-source-map',
+  mode: 'production',
   entry: {
-    main: ['./src/index.js', './src/home.js'],
-    myTest: './src/my-test.js'
+    main: ['./src/fid-oauth-v3.js'],
   },
   output: {
-    filename: '[name].js',
+    filename: 'fid-oauth-v3.min.js',
     path: path.resolve(__dirname, 'dist')
   },
   devServer: {
-    // "start": "webpack serve"
     contentBase: './dist'
   },
-  plugins: [
-    new webpack.ProvidePlugin({
-      $: 'jquery',
-      jQuery: 'jquery'
-    })
-  ],
   optimization: {
     splitChunks: {
       chunks: 'all'
     }
   },
   resolve: {
-    // https://kipalog.com/posts/Config-alias-chuan-trong-webpack
     alias: {
       '@src': path.resolve(__dirname, 'src/')
     },
@@ -50,14 +40,6 @@ module.exports = {
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'eslint-loader',
-
-        // moved to .eslintrc
-        // options: {
-        //   // eslint options (if necessary)
-        //   rules: {
-        //     quotes: ["error", "double"]
-        //   }
-        // },
       },
       {
         test: /\.(png|jpg|gif)$/i,
@@ -77,10 +59,8 @@ module.exports = {
       {
         test: /\.s[ac]ss$/i,
         use: [
-          // 'style-loader',
           { 
             loader: 'style-loader', 
-            // options: { insert: 'body' }
           },
           {
             loader: 'css-loader',
